@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { getSessions, deleteSession, getStreaks, getWeeklyStats } from '../api/services'
+import Navbar from '../components/Navbar'
 import MetricCard from '../components/MetricCard'
 import SessionItem from '../components/SessionItem'
 import LogSessionForm from '../components/LogSessionForm'
 
 const Dashboard = () => {
-  const { user, logout } = useAuth()
+  const {user} = useAuth()
   const [sessions, setSessions] = useState([])
   const [streaks, setStreaks] = useState(null)
   const [weeklyStats, setWeeklyStats] = useState(null)
@@ -60,13 +61,8 @@ const Dashboard = () => {
   return (
     <div style={styles.page}>
       {/* Header */}
-      <div style={styles.header}>
-        <div>
-          <div style={styles.logo}>⌨️ DevLog</div>
-          <div style={styles.greeting}>Welcome back, {user?.name?.split(' ')[0]} 👋</div>
-        </div>
-        <button onClick={logout} style={styles.logoutBtn}>Logout</button>
-      </div>
+      <Navbar />
+      <div style={styles.greeting}>Welcome back, {user?.name?.split(' ')[0]} 👋</div>
 
       {/* Metrics */}
       <div style={styles.metrics}>
@@ -134,17 +130,6 @@ const styles = {
   loading: {
     minHeight: '100vh', display: 'flex', alignItems: 'center',
     justifyContent: 'center', color: '#888', fontFamily: 'Arial',
-  },
-  header: {
-    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    marginBottom: '24px',
-  },
-  logo: { fontSize: '18px', fontWeight: '700', color: '#3C3489' },
-  greeting: { fontSize: '14px', color: '#888', marginTop: '4px' },
-  logoutBtn: {
-    padding: '8px 18px', background: '#fff', color: '#7F77DD',
-    border: '1.5px solid #7F77DD', borderRadius: '8px',
-    fontSize: '13px', fontWeight: '600', cursor: 'pointer',
   },
   metrics: {
     display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',

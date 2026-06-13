@@ -4,6 +4,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import Stats from './pages/Stats'
+import Goals from './pages/Goals'
 
 const App = () => {
   return (
@@ -15,11 +17,15 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route
             path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute><Dashboard /></ProtectedRoute>}
+          />
+          <Route
+            path="/stats"
+            element={<ProtectedRoute><Stats /></ProtectedRoute>}
+          />
+          <Route
+            path="/goals"
+            element={<ProtectedRoute><Goals /></ProtectedRoute>}
           />
         </Routes>
       </AuthProvider>
