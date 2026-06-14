@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Stats from './pages/Stats'
 import Goals from './pages/Goals'
+import NotFound from './pages/NotFound'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             path="/goals"
             element={<ProtectedRoute><Goals /></ProtectedRoute>}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

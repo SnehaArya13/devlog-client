@@ -5,6 +5,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
 } from 'recharts'
+import Spinner from '../components/Spinner'
 
 const COLORS = ['#7F77DD', '#1D9E75', '#378ADD', '#BA7517', '#D4537E']
 const DIFFICULTY_COLORS = { easy: '#5DCAA5', medium: '#EF9F27', hard: '#E66B6B' }
@@ -32,9 +33,15 @@ const Stats = () => {
     fetchData()
   }, [])
 
-  if (loading) {
-    return <div style={styles.loading}>Loading stats...</div>
-  }
+
+// replace
+if (loading) {
+  return <div style={styles.loading}>Loading your dashboard...</div>
+}
+// with
+if (loading) {
+  return <Spinner message="Loading your dashboard... (this may take a moment if the server is waking up)" />
+}
 
   const topicData = (stats?.topicBreakdown || []).map((t) => ({
     name: t.topic,
@@ -76,7 +83,7 @@ const Stats = () => {
           </div>
         </div>
 
-        <div style={styles.row}>
+        <div className="stats-row" style={styles.row}>
           {/* Topic breakdown chart */}
           <div style={styles.card}>
             <h3 style={styles.cardTitle}>Time by topic</h3>

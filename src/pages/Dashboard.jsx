@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import MetricCard from '../components/MetricCard'
 import SessionItem from '../components/SessionItem'
 import LogSessionForm from '../components/LogSessionForm'
+import Spinner from '../components/Spinner'
 
 const Dashboard = () => {
   const {user} = useAuth()
@@ -48,9 +49,15 @@ const Dashboard = () => {
     fetchAllData()
   }
 
-  if (loading) {
-    return <div style={styles.loading}>Loading your dashboard...</div>
-  }
+
+// replace
+if (loading) {
+  return <div style={styles.loading}>Loading your dashboard...</div>
+}
+// with
+if (loading) {
+  return <Spinner message="Loading your dashboard... (this may take a moment if the server is waking up)" />
+}
 
   // calculate today's minutes from sessions
   const todayStart = new Date()
@@ -65,7 +72,7 @@ const Dashboard = () => {
       <div style={styles.greeting}>Welcome back, {user?.name?.split(' ')[0]} 👋</div>
 
       {/* Metrics */}
-      <div style={styles.metrics}>
+      <div className="Metrics-grid" style={styles.metrics}>
         <MetricCard
           icon="🔥"
           label="Current streak"

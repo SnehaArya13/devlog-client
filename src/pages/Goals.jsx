@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getGoal, setGoal, updateGoal } from '../api/services'
 import Navbar from '../components/Navbar'
+import Spinner from '../components/Spinner'
 
 const Goals = () => {
   const [goalData, setGoalData] = useState(null)
@@ -48,9 +49,16 @@ const Goals = () => {
     }
   }
 
-  if (loading) {
-    return <div style={styles.loading}>Loading goals...</div>
-  }
+  
+
+// replace
+if (loading) {
+  return <div style={styles.loading}>Loading your dashboard...</div>
+}
+// with
+if (loading) {
+  return <Spinner message="Loading your dashboard... (this may take a moment if the server is waking up)" />
+}
 
   const progress = goalData?.today?.progressPercent ?? 0
   const goalMet = goalData?.today?.goalMet ?? false
